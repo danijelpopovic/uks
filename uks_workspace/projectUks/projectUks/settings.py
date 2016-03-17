@@ -85,6 +85,18 @@ DATABASES = {
 }
 
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.mysql',
+#         'NAME': 'uks',
+#         'USER': 'root',
+#         'PASSWORD': 'pass',
+#         'HOST': 'localhost',
+#         'PORT': '3306'
+#
+#     }
+# }
+
 # Internationalization
 # https://docs.djangoproject.com/en/1.8/topics/i18n/
 

@@ -29,3 +29,21 @@ class Comment(models.Model):
     date_created = models.DateTimeField('date created')
     issue = models.ForeignKey(Issue, related_name='issue')
     author_comment = models.ForeignKey(User, related_name='author_comment')
+
+class Object(models.Model):
+    date_created = models.DateTimeField('date created')
+
+class Folder(Object):
+     name = models.CharField(max_length=100)
+     repository_folder = models.ForeignKey(Repository, related_name='repository_folder')
+     subfolder = models.ForeignKey('self')
+
+class File(Object):
+    name = models.CharField(max_length=100)
+    size = models.IntegerField(default=0)
+    folder_obj = models.ForeignKey(Folder, related_name='folder_obj')
+
+class Version(models.Model):
+     date = models.DateTimeField('date')
+     object_version = models.ManyToManyField(Object, related_name='object_version')
+     user_version = models.ForeignKey(User, related_name='user_version')
