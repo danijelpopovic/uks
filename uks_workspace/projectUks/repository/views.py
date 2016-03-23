@@ -3,15 +3,18 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.db.models import Q
 from django.http import HttpResponse, HttpResponseRedirect, Http404
 from django.shortcuts import render, get_object_or_404, redirect
-from django.utils import timezone
 
-# Create your views here.
 from repository.models import Repository
+from django.http import *
+from django.shortcuts import render_to_response,redirect
+from django.template import RequestContext
+from .models import *
+from django.contrib.auth import authenticate, login, logout
+from django.utils import timezone
 
 
 def repository_list(request):
     today = timezone.now().date()
-
     queryset_list = Repository.objects.active(request.user)
 
     query = request.GET.get("q")

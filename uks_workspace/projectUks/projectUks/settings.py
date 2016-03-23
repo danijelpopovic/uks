@@ -42,7 +42,8 @@ INSTALLED_APPS = (
     'comment',
     'issue',
     'object',
-    'version'
+    'version',
+    'base'
 )
 
 ADMIN_ENABLED = False
