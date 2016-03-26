@@ -11,7 +11,7 @@ from django.template import RequestContext
 from .models import *
 from django.contrib.auth import authenticate, login, logout
 from django.utils import timezone
-from forms import RepositoryForm
+from .forms import RepositoryForm
 
 
 def repository_list(request):
