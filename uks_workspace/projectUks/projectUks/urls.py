@@ -15,11 +15,18 @@ Including another URLconf
 """
 from django.conf.urls import include, url
 from django.contrib import admin
+from django.contrib.auth.forms import UserCreationForm
+from django.views.generic import CreateView
 
 urlpatterns = [
 
     url(r'^login/$', 'base.views.login_user'),
     url(r'^logout/$', 'base.views.logout_user'),
+    url('^register/', CreateView.as_view(
+            template_name='register.html',
+            form_class=UserCreationForm,
+            success_url='/'
+    )),
     url(r'^admin/', include(admin.site.urls)),
     url(r'^repository/', include("repository.urls", namespace='repository')),
     url(r'^', include("base.urls", namespace='base')),
