@@ -11,6 +11,7 @@ from django.template import RequestContext
 from .models import *
 from django.contrib.auth import authenticate, login, logout
 from django.utils import timezone
+from forms import RepositoryForm
 
 
 def repository_list(request):
@@ -45,3 +46,27 @@ def repository_list(request):
         "today": today,
     }
     return render(request, "repository_list.html", context)
+
+def new_repository(request):
+    name = request.POST.get("name")
+    description = request.POST.get("description")
+    is_private = request.POST.get("isPrivate")
+
+    print(name)
+    print(description)
+    print(is_private)
+
+    form = RepositoryForm(request.POST)
+    context = {
+        "form": form
+    }
+
+    if form.is_valid():
+        instance = form.save(commit=False)
+        instance.author = request.user
+        instance.save()
+        return repository_list(request)
+
+
+
+    return render(request, "create_repository.html", context)
