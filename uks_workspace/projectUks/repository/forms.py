@@ -1,13 +1,12 @@
+from . import models
 from django import forms
-
-from .models import Repository
-
 
 class RepositoryForm(forms.ModelForm):
     class Meta:
-        model = Repository
+        model = models.Repository
         fields = [
             "name",
             "description",
             "isPrivate",
         ]
+
