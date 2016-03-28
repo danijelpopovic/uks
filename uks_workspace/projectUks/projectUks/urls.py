@@ -29,5 +29,6 @@ urlpatterns = [
     )),
     url(r'^admin/', include(admin.site.urls)),
     url(r'^repository/', include("repository.urls", namespace='repository')),
+    url(r'^issue/', include("issue.urls", namespace='issue')),
     url(r'^', include("base.urls", namespace='base')),
 ]

@@ -2,15 +2,17 @@
 {% block content %}
 
 <div>
-    <h1>{{ question.name }}</h1>
+    <h1>{{ repository.name }}</h1>
+    <h2>Author:</h2>
+    <div>{{repository.author}}</div>
+    <h2>Contributors: <a href="#">Add</a></h2>
+    <h2>Issues: <a href="/issue/new/{{repository.id}}">Add</a></h2>
     <div>
-
-
-    </div>
-
-    <div>
-
-
+        {% for issue in issues%}
+            <a href="#">{{issue.title}}</a> by: {{issue.issue_author.username}}
+            <br/>created: {{issue.date_created}}
+            <br/>modified: {{issue.date_modified}}<hr/>
+        {% endfor %}
     </div>
 </div>
 

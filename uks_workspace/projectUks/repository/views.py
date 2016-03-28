@@ -4,6 +4,7 @@ from django.shortcuts import render, get_object_or_404
 from .models import *
 from django.utils import timezone
 from .forms import RepositoryForm
+from issue.models import Issue
 
 
 def repository_list(request):
@@ -63,6 +64,12 @@ def new_repository(request):
 
 
 def view_repository(request, repository_id):
-    question = get_object_or_404(Repository, pk=repository_id)
-    return render(request, "repository.html", {'question': question})
+    repository = get_object_or_404(Repository, pk=repository_id)
+    issues = Issue.objects.filter(repository=repository)
+    context = {
+
+        'repository': repository,
+        'issues': issues
+    }
+    return render(request, "repository.html", context)
 
