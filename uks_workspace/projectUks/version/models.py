@@ -1,6 +1,8 @@
 from django.db import models
 from django.conf import settings
+
 from object.models import Object
+
 
 class Version(models.Model):
      date = models.DateTimeField('date')

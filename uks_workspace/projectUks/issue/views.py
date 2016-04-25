@@ -2,7 +2,7 @@ from django.shortcuts import render
 from .forms import IssueForm
 from datetime import datetime
 from django.shortcuts import render, get_object_or_404
-from models import Repository
+from repository.models import Repository
 from repository.views import view_repository
 
 # Create your views here.
