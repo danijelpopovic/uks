@@ -35,6 +35,12 @@ def base_index(request):
         return render(request, 'login.html', context_instance=RequestContext(request))
 
 
+def template_page(request):
+    return render(request, 'template.html', context_instance=RequestContext(request))
+
+
+def template2_page(request):
+    return render(request, 'templateForm.html', context_instance=RequestContext(request))
 # def register(request):
 #     if request.method == 'POST':
 #         uf = UserForm(request.POST, prefix='user')

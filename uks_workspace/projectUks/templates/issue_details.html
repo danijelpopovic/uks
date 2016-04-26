@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="row">
+    <div class="col-lg-12">
+        <h1 class="page-header">
+            {{ issue.title }} ( Author: {{ issue.issue_author}} )
+        </h1>
+
+        <div class="page-header">
+            <h4>Description</h4>
+        </div>
+        <div class="well">
+            <p>{{ issue.description }}</p>
+        </div>
+
+
+        <div>
+            <p>Created: {{ issue.date_created}}</p>
+            <p>Modified: {{ issue.date_modified}}</p>
+            <p>Closed: {{ issue.date_closed}}</p>
+        </div>
+    </div>
+</div>
+
+
+
+{% endblock content %}

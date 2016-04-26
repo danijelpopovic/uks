@@ -8,4 +8,9 @@ class IssueForm(forms.ModelForm):
             "title",
             "description",
         ]
+        widgets = {
+          'title': forms.TextInput(attrs={'class': "form-control"}),
+          'description': forms.Textarea(attrs={'rows': 50, 'cols': 100, 'class': "form-control"})
+        }
+
 

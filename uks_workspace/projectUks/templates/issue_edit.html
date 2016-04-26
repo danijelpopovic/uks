@@ -1,14 +1,14 @@
+
 {% extends "base.html" %}
 
 {% block content %}
-
 <div class="row">
     <div class="col-lg-12">
         <form method="POST" role="form">
              <div class="form-group">
                 {% csrf_token %}
                 {{form.as_p}}
-                <input type="submit" value="Create"/>
+                <input type="submit" value="Save"/>
             </div>
         </form>
     </div>
