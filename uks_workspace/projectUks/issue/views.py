@@ -23,7 +23,9 @@ def new_issue(request, repository_id):
     # repository =
     # issue_author =
     # assigned = None
+    repository = get_object_or_404(Repository, id=repository_id)
     form = IssueForm(request.POST)
+
     context = {
         "form": form
     }

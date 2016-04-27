@@ -34,14 +34,18 @@
                             <table class="table table-bordered table-hover table-striped">
                                 <thead>
                                     <tr>
-                                        <th>Repository</th>
-
+                                        <th>Repositories</th>
+                                        <th></th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                   {% for obj in object_list %}
                                     <tr class="active">
                                         <td> <a href="{% url 'repository:view' obj.id %}">{{obj.name}}</a></td>
+                                        <td>
+                                            <a href="/repository/edit/{{ obj.id }}">Edit</a> |
+                                            <a href="#">Delete</a>
+                                        </td>
                                     </tr>
                                   {% endfor %}
                                 </tbody>
@@ -49,5 +53,5 @@
                         </div>
                     </div>
      </div>
-
+ <a href="/repository/new">Create new repository</a>
 {% endblock content %}

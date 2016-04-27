@@ -2,10 +2,8 @@
 {% block content %}
 
 <div>
-    <h1>{{ repository.name }}</h1>
-    <h2>Author:</h2>
-    <div>{{repository.author}}</div>
-    <h2>Contributors: <a href="#">Add</a></h2>
+    <h1>{{ repository.name }} ( {{repository.author}} )</h1>
+
     <h2>Issues: <a href="/issue/new/{{repository.id}}">Add</a></h2>
     <div>
         {% for issue in issues%}
@@ -18,13 +16,25 @@
                 {% if issue.is_closed %}
                 <div class="panel panel-red">
                     <div class="panel-heading">
-                        <h3 class="panel-title"><a href="/issue/details/{{ issue.id }}">{{issue.title}}</a> by: {{issue.issue_author.username}}<a class="btn btn-xs btn-warning" href="/issue/edit/{{ issue.repository.id }}/{{ issue.id }}">Edit</a></h3>
+                        <h3 class="panel-title">
+                            <a href="/issue/details/{{ issue.id }}">{{issue.title}}</a> by: {{issue.issue_author.username}}
+                            <a class="btn btn-xs btn-warning" href="/issue/edit/{{ issue.repository.id }}/{{ issue.id }}">Edit</a></h3>
                         <a type="button" class="btn btn-xs btn-success" href="/issue/close/{{issue.id}}/{{ repository.id }}">Open</a>
                     </div>
                     <div class="panel-body">
+                        <p>
+                        Members:
+                        {% for obj in issue.workers.all %}
+                            <b>{{ obj.username }}</b>,
+                        {% endfor %}
+                        </p>
+
+                        <small>
                           <br/>created: {{issue.date_created}}
                           <br/>modified: {{issue.date_modified}}<hr/>
+                        </small>
                     </div>
+
                 </div>
                 {% else %}
                  <div class="panel panel-green">
@@ -33,8 +43,17 @@
                         <a type="button" class="btn btn-xs btn-danger " href="/issue/close/{{issue.id}}/{{ repository.id }}">Close</a>
                     </div>
                     <div class="panel-body">
+                        <p>
+                        Members:
+                        {% for obj in issue.workers.all %}
+                            <b>{{ obj.username }}</b>,
+                        {% endfor %}
+                        </p>
+
+                        <small>
                           <br/>created: {{issue.date_created}}
                           <br/>modified: {{issue.date_modified}}<hr/>
+                        </small>
                     </div>
                 </div>
                  {% endif %}

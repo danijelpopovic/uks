@@ -1,5 +1,9 @@
+from django.shortcuts import get_object_or_404
+
+from repository.models import Repository
 from . import models
 from django import forms
+
 
 class IssueForm(forms.ModelForm):
     class Meta:
@@ -7,10 +11,9 @@ class IssueForm(forms.ModelForm):
         fields = [
             "title",
             "description",
+            "workers"
         ]
         widgets = {
-          'title': forms.TextInput(attrs={'class': "form-control"}),
-          'description': forms.Textarea(attrs={'rows': 50, 'cols': 100, 'class': "form-control"})
+            'title': forms.TextInput(attrs={'class': "form-control"}),
+            'description': forms.Textarea(attrs={'rows': 15, 'cols': 100, 'class': "form-control"})
         }
-
-

@@ -1,5 +1,4 @@
 import datetime
-
 from django.db import models
 from django.conf import settings
 
@@ -7,9 +6,17 @@ from django.conf import settings
 class RepositoryManager(models.Manager):
     def active(self, user, *args, **kwargs):
         # Post.objects.all() = super(PostManager, self).all()
-        print(user)
+        print("------------")
         result = super(RepositoryManager, self).filter(author=user.id)
-        print(result)
+        # repositories = Repository.objects.all()
+        # list_rep = []
+        # for r in repositories:
+        #     for con in r.contributions.all():
+        #         print(con.username)
+        #         list_rep.append(r)
+        #
+        # result.extend(list(list_rep))
+        # print(result)
         return result
 
 
@@ -27,6 +34,3 @@ class Repository(models.Model):
 
     def __str__(self):
         return self.name
-
-
-

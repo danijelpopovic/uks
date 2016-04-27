@@ -13,3 +13,4 @@ class Issue(models.Model):
     repository = models.ForeignKey(Repository, related_name='repository')
     issue_author = models.ForeignKey(settings.AUTH_USER_MODEL, default=1, related_name='issue_author')
     assigned = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name='assigned')
+    workers = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name='workers')

@@ -29,6 +29,7 @@ def logout_user(request):
 
 
 def base_index(request):
+    request.session['menu'] = 'home'
     if request.user.is_authenticated():
         return render(request, 'index.html', context_instance=RequestContext(request))
     else:

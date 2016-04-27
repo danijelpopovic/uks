@@ -1,6 +1,8 @@
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.db.models import Q
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, render_to_response
+from django.template import RequestContext
+
 from .models import *
 from django.utils import timezone
 from .forms import RepositoryForm
@@ -11,6 +13,8 @@ def repository_list(request):
     today = timezone.now().date()
     queryset_list = Repository.objects.active(request.user)
 
+    request.session['menu'] = 'repository'
+
     query = request.GET.get("q")
     if query:
         queryset_list = queryset_list.filter(
@@ -19,6 +23,8 @@ def repository_list(request):
             Q(user__first_name__icontains=query) |
             Q(user__last_name__icontains=query)
         ).distinct()
+
+
     paginator = Paginator(queryset_list, 8)  # Show 25 contacts per page
     page_request_var = "page"
     page = request.GET.get(page_request_var)
@@ -41,6 +47,7 @@ def repository_list(request):
 
 
 def new_repository(request):
+    request.session['menu'] = 'repository'
     name = request.POST.get("name")
     description = request.POST.get("description")
     is_private = request.POST.get("isPrivate")
@@ -63,7 +70,25 @@ def new_repository(request):
     return render(request, "create_repository.html", context)
 
 
+def edit(request, repository_id=None):
+    request.session['menu'] = 'repository'
+    if id:
+        repository = get_object_or_404(Repository, id=repository_id)
+
+        if request.POST:
+            form = RepositoryForm(request.POST, instance=repository)
+            if form.is_valid():
+                form.save()
+                return repository_list(request)
+
+        else:
+            form = RepositoryForm(instance=repository)
+
+    return render_to_response("repository_edit.html", {'form': form, }, context_instance=RequestContext(request))
+
+
 def view_repository(request, repository_id):
+    request.session['menu'] = 'repository'
     repository = get_object_or_404(Repository, pk=repository_id)
     issues = Issue.objects.filter(repository=repository)
     context = {
