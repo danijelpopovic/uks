@@ -3,25 +3,7 @@
 
 {% block content %}
 
-<!--<div class='col-sm-6 col-sm-offset-3'>
 
-<form method='GET' action=''>
-<input type='text' name='q' placeholder='Search repository' value='{{ request.GET.q }}'/>
-<input type='submit' value='Search' />
-</form>
-{% for obj in object_list %}
-<div class="row">
-  <div class="col-sm-12">
-    <div class="thumbnail">
-         <a href="{% url 'repository:view' obj.id %}">{{obj.name}}</a>
-
-    </div>
-  </div>
-<hr/>
-</div>
-{% endfor %}
-
-</div>-->
 
 
 <form method='GET' action=''>
@@ -41,7 +23,7 @@
                                 <tbody>
                                   {% for obj in object_list %}
                                     <tr class="active">
-                                        <td> <a href="{% url 'repository:view' obj.id %}">{{obj.name}}</a></td>
+                                        <td><a href="/repository/view/{{ obj.id }}">{{obj.name}}</a></td>
                                         <td>
                                             <a href="/repository/edit/{{ obj.id }}">Edit</a> |
                                             <a href="#">Delete</a>
