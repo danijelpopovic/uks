@@ -25,5 +25,29 @@
 </div>
 
 
+<input onclick="AddNewComment()" value="Add new comment" type="button"/>
+<div class="row">
+        <div class="col-lg-4" id="new_comment_id"></div>
+</div>
+
+ <div class="col-sm-6">
+    <div class="list-group" id="comment_list_id">
+        {% include 'comment_list.html' %}.
+    </div>
+</div>
+
+<script>
+
+    function AddNewComment(){
+        $.ajax({
+                type : "GET",
+                url : "/comment/new/{{issue.id}}",
+                success : function(response) {
+                    $('#new_comment_id').html(response);
+                }
+            });
+    }
+
+</script>
 
 {% endblock content %}

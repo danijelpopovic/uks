@@ -5,18 +5,8 @@ from django.conf import settings
 
 class RepositoryManager(models.Manager):
     def active(self, user, *args, **kwargs):
-        # Post.objects.all() = super(PostManager, self).all()
-        print("------------")
         result = super(RepositoryManager, self).filter(author=user.id)
-        # repositories = Repository.objects.all()
-        # list_rep = []
-        # for r in repositories:
-        #     for con in r.contributions.all():
-        #         print(con.username)
-        #         list_rep.append(r)
-        #
-        # result.extend(list(list_rep))
-        # print(result)
+
         return result
 
 
@@ -34,3 +24,6 @@ class Repository(models.Model):
 
     def __str__(self):
         return self.name
+
+    def get_contributions(self):
+        return "\n".join([p.contributions for p in self.contributions.all()])

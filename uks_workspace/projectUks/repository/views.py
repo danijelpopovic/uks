@@ -2,7 +2,6 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.db.models import Q
 from django.shortcuts import render, get_object_or_404, render_to_response
 from django.template import RequestContext
-
 from .models import *
 from django.utils import timezone
 from .forms import RepositoryForm
@@ -24,8 +23,7 @@ def repository_list(request):
             Q(user__last_name__icontains=query)
         ).distinct()
 
-
-    paginator = Paginator(queryset_list, 8)  # Show 25 contacts per page
+    paginator = Paginator(queryset_list, 8)
     page_request_var = "page"
     page = request.GET.get(page_request_var)
     try:
@@ -37,8 +35,21 @@ def repository_list(request):
         # If page is out of range (e.g. 9999), deliver last page of results.
         queryset = paginator.page(paginator.num_pages)
 
+    repositories = Repository.objects.all()
+
+    res = []
+    repositoriesuser = repositories.filter(author=request.user.id)
+    if repositoriesuser != None:
+        for repos in repositoriesuser:
+            res.append(repos)
+
+    for r in repositories:
+        for con in r.contributions.all():
+            if con == request.user and r not in res:
+                res.append(r)
+
     context = {
-        "object_list": queryset,
+        "object_list": res,
         "title": "List",
         "page_request_var": page_request_var,
         "today": today,
@@ -97,4 +108,3 @@ def view_repository(request, repository_id):
         'issues': issues
     }
     return render(request, "repository.html", context)
-

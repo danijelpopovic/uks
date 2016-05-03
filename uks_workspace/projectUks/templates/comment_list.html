@@ -1,0 +1,10 @@
+
+
+
+{% for obj in comments %}
+    <div class="list-group-item">
+        <h4 class="list-group-item-heading">{{obj.author_comment}} : {{obj.title}}</h4>
+        <p class="list-group-item-text">{{obj.content}}</p>
+        <p> {{obj.date_created}}</p>
+    </div>
+{% endfor %}

@@ -19,14 +19,12 @@ from django.contrib import admin
 from django.contrib.auth.forms import UserCreationForm
 from django.views.generic import CreateView
 
-
-
-
+import base.views
 
 urlpatterns = {
 
-    url(r'^login/$', 'base.views.login_user'),
-    url(r'^logout/$', 'base.views.logout_user'),
+    url(r'^login/$', base.views.login_user),
+    url(r'^logout/$', base.views.logout_user),
     url('^register/', CreateView.as_view(
         template_name='register.html',
         form_class=UserCreationForm,
@@ -35,5 +33,6 @@ urlpatterns = {
     url(r'^admin/', include(admin.site.urls)),
     url(r'^repository/', include("repository.urls", namespace='repository')),
     url(r'^issue/', include("issue.urls", namespace='issue')),
+    url(r'^comment/', include("comment.urls", namespace='comment')),
     url(r'^', include("base.urls", namespace='base')),
 }

@@ -1,6 +1,7 @@
 from django.shortcuts import render, render_to_response
 from django.template import RequestContext
 
+from comment.models import Comment
 from issue.models import Issue
 from .forms import IssueForm
 from datetime import datetime
@@ -78,7 +79,9 @@ def close_issue(request, issue_id, repository_id):
 
 def details(request, issue_id):
     issue = get_object_or_404(Issue, id=issue_id)
+    comments = Comment.objects.filter(issue=issue)
     context = {
-        'issue': issue
+        'issue': issue,
+        'comments': comments,
     }
     return render(request, "issue_details.html", context)

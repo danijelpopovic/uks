@@ -10,6 +10,6 @@ urlpatterns = [
     url(r'^$', repository_list, name='list'),
     url(r'^new/', new_repository, name='new'),
     url(r'^edit/(?P<repository_id>\d+)/$', edit, name='edit'),
-    url(r'^(?P<repository_id>[0-9]+)/view/', view_repository, name='view'),
+    url(r'^view/(?P<repository_id>[0-9]+)/$', view_repository, name='view'),
 
 ]

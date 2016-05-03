@@ -1,8 +1,99 @@
+{% load staticfiles %}
+<html>
+<head>
+   <title>Login</title>
+<!-- Latest compiled and minified CSS -->
 
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
 
+    <link rel='stylesheet' href='{% static "css/bootstrap.css" %}' />
+    <link href='{% static "css/sb-admin.css" %}' rel="stylesheet">
+    <link href='{% static "css/plugins/morris.css" %}' rel="stylesheet">
+    <link href='{% static "font-awesome/css/font-awesome.min.css" %}' rel="stylesheet" type="text/css">
+         <!-- jQuery -->
+    <script src='{% static "js/jquery.js" %}'></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <style>
+        body {
+  padding-top: 40px;
+  padding-bottom: 40px;
+  background-color: #eee;
+}
 
+.form-signin {
+  max-width: 330px;
+  padding: 15px;
+  margin: 0 auto;
+}
+.form-signin .form-signin-heading,
+.form-signin .checkbox {
+  margin-bottom: 10px;
+}
+.form-signin .checkbox {
+  font-weight: normal;
+}
+.form-signin .form-control {
+  position: relative;
+  height: auto;
+  -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+          box-sizing: border-box;
+  padding: 10px;
+  font-size: 16px;
+}
+.form-signin .form-control:focus {
+  z-index: 2;
+}
+.form-signin input[type="email"] {
+  margin-bottom: -1px;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+}
+.form-signin input[type="password"] {
+  margin-bottom: 10px;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+    </style>
+
+</head>
+
+<body>
 
 <div class="row">
+    <div class="container">
+
+      <form class="form-signin" name="LoginForm" action="/login/" method="post">
+        {% csrf_token %}
+        {% if next %}
+            <input type="hidden" name="next" value="{{ next }}" />
+        {% endif %}
+        <h2 class="form-signin-heading">UksProject</h2>
+        <label for="username" class="sr-only">Username</label>
+        <input type="text" id="username" class="form-control" name="username" placeholder="Username" required autofocus>
+        <label for="password" class="sr-only">Password</label>
+        <input type="password" id="password" class="form-control" name="password" placeholder="Password" required>
+        <div class="checkbox">
+          <label>
+            <input type="checkbox" value="remember-me"> Remember me
+          </label>
+             <a href="/register/">Register new</a>
+        </div>
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Login</button>
+           <div class="control-group">
+            <div class="controls">
+
+            </div>
+        </div>
+      </form>
+
+    </div>
+</div>
+<!--<div class="row">
     <div id="login">
         <form class="form-horizontal" name="LoginForm" action="/login/" method="post">
         {% csrf_token %}
@@ -30,4 +121,6 @@
 
         </form>
     </div>
-</div>
+</div>-->
+</body>
+</html>
