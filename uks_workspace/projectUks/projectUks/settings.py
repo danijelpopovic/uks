@@ -87,6 +87,7 @@ WSGI_APPLICATION = 'projectUks.wsgi.application'
 #     }
 # }
 
+
 DATABASES = {
     'default': {
         'ENGINE': 'mysql.connector.django',
@@ -98,6 +99,7 @@ DATABASES = {
 
     }
 }
+
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.8/topics/i18n/

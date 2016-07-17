@@ -18,10 +18,12 @@ from django.conf.urls import url
 from django.contrib import admin
 from django.contrib.auth.forms import UserCreationForm
 from django.views.generic import CreateView
+from django.conf import settings
+from django.conf.urls.static import static
 
 import base.views
 
-urlpatterns = {
+urlpatterns = [
 
     url(r'^login/$', base.views.login_user),
     url(r'^logout/$', base.views.logout_user),
@@ -35,4 +37,4 @@ urlpatterns = {
     url(r'^issue/', include("issue.urls", namespace='issue')),
     url(r'^comment/', include("comment.urls", namespace='comment')),
     url(r'^', include("base.urls", namespace='base')),
-}
+] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
